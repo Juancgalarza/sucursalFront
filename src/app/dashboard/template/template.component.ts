@@ -8,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
 export class TemplateComponent implements OnInit {
 
   public opened = false;
-  
+
+  public menus:any[] = [];
   constructor() { }
 
   ngOnInit(): void {
+    this.loadMenus();
   }
 
+  loadMenus(){
+    this.menus = [
+      {
+        name: 'Home',
+        icon: 'home',
+        path: 'home'
+      },
+      {
+        name: 'Users',
+        icon: 'person',
+        path: 'users'
+      },
+    ];
+  }
 }
