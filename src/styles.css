@@ -10,3 +10,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-red{
     color: #F56565;
 }
+
+.active-link-secundary{
+  color: #CD16A3 !important;
+}
+
+.active-link{
+  border-left: 5px solid #A51BB2;
+}

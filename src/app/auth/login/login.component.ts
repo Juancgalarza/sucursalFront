@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private _snackService:SnackService,
     private cookieService:CookieService,
     private router:Router
-    ) { 
+    ) {
 
     this.userLogin = new Usuario();
   }
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-  
+
     if(this.userLogin.email.length == 0){
       this._snackService.open('Ingrese email !!', 'text-red');
       return;
@@ -45,6 +45,8 @@ export class LoginComponent implements OnInit {
       this._userServicie.login(json)
 
       .subscribe((res:any) => {
+        console.log(res);
+
         if(res.status){
           this._snackService.open('Bienvenido !!');
           // console.log(res);
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.lookButton = false;
-      }); 
+      });
     }
   }
 }

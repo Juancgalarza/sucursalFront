@@ -16,6 +16,6 @@ import { NavComponent } from './layouts/nav/nav.component';
     CommonModule,
     AdminRoutingModule,
   ],
-  exports: [HomeComponent, UserAdminComponent]
+  exports: [HomeComponent, UserAdminComponent, NavComponent]
 })
 export class AdminModule { }

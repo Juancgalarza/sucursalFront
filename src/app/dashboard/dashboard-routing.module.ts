@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'home', component: HomeComponent
       },{
         path: 'users', component: UserAdminComponent
+      },
+      {
+        path: 'sucursales',
+        loadChildren: () => import('./../sucursales-module/sucursales-module.module').then(m => m.SucursalesModuleModule)
       }
     ]
   }

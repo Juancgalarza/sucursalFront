@@ -1,3 +1,4 @@
+import { SucursalesModuleModule } from './../sucursales-module/sucursales-module.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -25,7 +26,8 @@ import { AdminModule } from '../admin/admin.module';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    AdminModule
+    AdminModule,
+    SucursalesModuleModule
   ],
   exports: [TemplateComponent]
 })

@@ -9,6 +9,9 @@ const routes:Routes = [
   {
     path: 'app',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },{
+    path: '**',
+    redirectTo: ''
   }
 ];
 
