@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MenuService } from './../../servicios/menu/menu.service';
 import { Usuario } from './../../models/usuario.model';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,7 +20,8 @@ export class TemplateComponent implements OnInit {
 
   constructor(
     private cookie:CookieService,
-    private _menuService:MenuService
+    private _menuService:MenuService,
+    private router:Router
   ) {
     this.usuario = new Usuario();
   }
@@ -38,6 +40,15 @@ export class TemplateComponent implements OnInit {
         // console.log(this.resMenu);
       })
     );
+  }
+
+  salir(){
+    console.log("click");
+
+    localStorage.clear();
+    this.cookie.delete('user');
+
+    this.router.navigateByUrl('/login');
 
   }
 }

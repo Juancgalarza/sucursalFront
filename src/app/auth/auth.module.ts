@@ -8,15 +8,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SnackService } from '../shared/snack/snack.service';
 import { CookieService } from 'ngx-cookie-service';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     LoginComponent
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule, 
+    AuthRoutingModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers:[
     SnackService,

@@ -12,6 +12,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AdminModule } from '../admin/admin.module';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AdminModule } from '../admin/admin.module';
     MatIconModule,
     MatButtonModule,
     AdminModule,
-    SucursalesModuleModule
+    SucursalesModuleModule,
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   exports: [TemplateComponent]
 })

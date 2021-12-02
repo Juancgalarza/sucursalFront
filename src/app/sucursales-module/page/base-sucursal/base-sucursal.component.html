@@ -12,7 +12,7 @@
         </button>
 
         <div class="collapse navbar-collapse text-center" id="navbarScroll">
-          <ul class="text-center navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-flex justify-content-center" style="--bs-scroll-height: 100px; text-align: center !important;">
+          <ul class="text-center navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-flex justify-content-center" style="--bs-scroll-height: 100px; text-align: center !important; margin:auto">
             <li class="" let i = index; *ngFor="let p of menusChildren.data">
               <a class="nav-link link text-gray" aria-current="page" [routerLink]="p.url" routerLinkActive="active-link-secundary"
               style="text-decoration: underline; cursor: pointer;">{{ p.menu }}</a>
@@ -22,10 +22,10 @@
       </div>
     </nav>
 
-    <div class="card">
-      <div class="card-body">
-        <router-outlet></router-outlet>
-      </div>
+    <div class="mt-4">
+      <router-outlet></router-outlet>
+      <!-- <div class="card-body">
+      </div> -->
     </div>
   </main>
 </div>

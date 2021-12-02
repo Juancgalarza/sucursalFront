@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
       this._userServicie.login(json)
 
       .subscribe((res:any) => {
-        console.log(res);
 
         if(res.status){
           this._snackService.open('Bienvenido !!');
@@ -54,9 +53,9 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('app/home');
         }else{
           this._snackService.open(res.message, 'text-red');
+          this.lookButton = false;
         }
 
-        this.lookButton = false;
       });
     }
   }

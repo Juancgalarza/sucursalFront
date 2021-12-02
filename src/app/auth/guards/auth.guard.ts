@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate{
 
         if(dato){
             dato = JSON.parse(dato);
-            
+
             if(dato.rol_id == 1){
                 this.router.navigateByUrl('app/home');
             }else
@@ -34,9 +34,9 @@ export class AuthGuard implements CanActivate{
             return false;
         }else{
             //No hay sesion activa
-            console.log("NO hay session activa");
+            // console.log("NO hay session activa");
             return true;
         }
     }
-    
+
 }

@@ -1,1 +1,86 @@
-<p>listar-sucursal works!</p>
+<div class="container-fluid p-2">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header pb-0">
+            <div class="row">
+              <div class="col-lg-6 col-7">
+                <h6>Negocios</h6>
+                <p class="text-sm mb-0">
+                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                    <span class="font-weight-bold ms-1">30 negocios</span> disponibles
+                </p>
+              </div>
+
+            </div>
+        </div>
+
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Negocios</th>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                      Gerente</th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Dirección</th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Tipo</th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let n of [1,1,1,1]">
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-jira.svg"
+                              class="avatar avatar-sm me-3" alt="jira">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="d-flex align-items-center">
+                        <div class="avatar-group mt-2">
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Ryan Tompson">
+                                <img src="../assets/img/team-1.jpg" alt="team1">
+                            </a>
+                          </div>
+
+                          <span style="margin-left: 5px;">Olga González</span>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold">
+                          Santa Elena, Salinas </span>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="text-xs font-weight-bold">
+                        Matriz </span>
+                    </td>
+
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">
+                        Online
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
