@@ -8,67 +8,176 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-8">
-      <div class="p-3">
-        <div class="row">
-          <div class="col-12 col-md-6 form-group">
-            <select class="form-control">
-              <option value="0">Seleccione tipo de negocio</option>
-            </select>
+      <form [formGroup]="form" (ngSubmit)="procesarForm()">
+        <div class="p-3">
+          <div class="row">
+            <div class="col-12 col-md-6 form-group">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Tipo de negocio</mat-label>
+                <mat-select (selectionChange)="selectipoNegocio($event)" formControlName="tipo_negocio_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let tn of tiposNegocios | async" [value]="tn.id">{{tn.tipo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.tipo_negocio_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione el tipo de negocio</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+              <mat-form-field class="w-100" appearance="legacy">
+                <mat-label>Nombre negocio</mat-label>
+
+                <input matInput type="text" class="form-control" placeholder="Ingrese nombre de negocio"
+                  formControlName="nombre" (keypress)="validarLetras($event)"
+                  [ngClass]="(submitted && f.nombre?.errors) || (f.nombre.touched || f.nombre.dirty) ? 'is-invalid': ''"
+                  [ngClass]="f.nombre.valid ? 'is-valid': ''">
+              </mat-form-field>
+
+              <div *ngIf="submitted || (f.nombre.touched || f.nombre.dirty)" class="-mt-12">
+                <small *ngIf="f.nombre.errors?.required" class="text-danger">
+                  Nombre es requerido
+                </small>
+                <small *ngIf="f.nombre.errors?.minlength" class="text-danger">
+                  Mínimo de 3 carácteres
+                </small>
+              </div>
+            </div>
           </div>
 
-          <div class="col-12 col-md-6 form-group">
-            <input type="text" class="form-control" placeholder="Ingrese nombre de negocio">
+          <div class="row">
+            <div class="col-12 col-md-6 form-group">
+
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Provincia</mat-label>
+                <mat-select (selectionChange)="selectProvincia($event)" formControlName="provincia_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let tn of provincias | async" [value]="tn.id">{{tn.provincia}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.provincia_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione una provincia</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Ciudad</mat-label>
+                <mat-select (selectionChange)="selectCiudad($event)" formControlName="ciudad_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let c of ciudades | async" [value]="c.id">{{c.ciudad}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.ciudad_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione una ciudad</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6 form-group">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Seccion</mat-label>
+                <mat-select (selectionChange)="selectSeccion($event)" formControlName="seccion_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let s of secciones | async" [value]="s.id">{{s.tipo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.seccion_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione una seccion</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Horario</mat-label>
+                <mat-select (selectionChange)="selectHorario($event)" formControlName="horario_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let h of horarios | async" [value]="h.id">{{h.inicio}} - {{h.fin}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.horario_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione un horario</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Tipo Empleado</mat-label>
+                <mat-select (selectionChange)="getEmpleados($event)" formControlName="tipo_empleo_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let te of tipoEmpleados | async" [value]="te.id"> {{te.tipo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.tipo_empleo_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione el tipo de empleado</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Empleado a cargo</mat-label>
+                <mat-select (selectionChange)="selectEmpleado($event)" formControlName="empleado_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let e of empleados | async" [value]="e.id"> {{e.persona.nombres}} {{e.persona.apellidos}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted && negocio.empleado_id == 0" class="-mt-12">
+                <small class="text-danger">Seleccione el empleado a cargo</small>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+
+              <mat-form-field class="w-100" appearance="legacy">
+                <mat-label>Dirección negocio</mat-label>
+                <textarea matInput class="form-control" placeholder="Ingrese ubicación"
+                formControlName="ubicacion"
+                [ngClass]="(submitted && f.ubicacion?.errors) || (f.ubicacion.touched || f.ubicacion.dirty) ? 'is-invalid': ''"
+                [ngClass]="f.ubicacion.valid ? 'is-valid': ''">
+
+                </textarea>
+              </mat-form-field>
+
+              <div *ngIf="submitted || (f.ubicacion.touched || f.ubicacion.dirty)" class="-mt-12">
+                <small *ngIf="f.ubicacion.errors?.required" class="text-danger">
+                  ubicacion es requerido
+                </small>
+                <small *ngIf="f.ubicacion.errors?.minlength" class="text-danger">
+                 Direccion completa
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-12 col-sm-4">
+              <button class="btn bg-gradient-dark" type="submit" [disabled]="form.invalid">
+                Agregar !!
+              </button>
+            </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-12 col-md-6 form-group">
-            <select class="form-control">
-              <option value="0">Seleccione Provincia</option>
-            </select>
-          </div>
-
-          <div class="col-12 col-md-6 form-group">
-            <select class="form-control">
-              <option value="0">Seleccione Ciudad</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 col-md-6 form-group">
-            <select class="form-control">
-              <option value="0">Seleccione una seccion</option>
-            </select>
-          </div>
-
-          <div class="col-12 col-md-6 form-group">
-            <select class="form-control">
-              <option value="0">Selection horario de atención</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <select class="form-control">
-              <option value="0">Seleccione gerente</option>
-            </select>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <textarea class="form-control" placeholder="Ingrese ubicación"></textarea>
-          </div>
-        </div>
-
-        <div class="row mt-3">
-          <div class="col-12 col-sm-4">
-            <button class="btn bg-gradient-dark">
-              Agregar !!
-            </button>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

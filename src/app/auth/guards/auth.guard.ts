@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate{
             dato = JSON.parse(dato);
 
             if(dato.rol_id == 1){
-                this.router.navigateByUrl('app/home');
+                this.router.navigateByUrl('/app/home');
             }else
             if(dato.rol_id == 2){
 

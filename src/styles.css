@@ -1,20 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.b1{
-    border: 1px solid red;
+a, p, small{
+  font-family: 'Comfortaa', cursive;
 }
 
-.text-red{
-    color: #F56565;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.active-link-secundary{
-  color: #CD16A3 !important;
+.b1 {
+  border: 1px solid red;
 }
 
-.active-link{
-  border-left: 5px solid #A51BB2;
+.text-red {
+  color: #f56565;
+}
+
+.active-link {
+  border-left: 5px solid #a51bb2;
+}
+
+.text-gray{
+  color: #495057 !important;
+}
+
+.active-link-secundary {
+  color: #cd16a3 !important;
+  border-bottom: 2px solid #b3a7b0;
+}
+
+input{
+  outline: none;
+  background-color: #dfe;
+  border: 0;
 }

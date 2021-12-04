@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { MenuService } from './../../servicios/menu/menu.service';
 import { Usuario } from './../../models/usuario.model';
 import { CookieService } from 'ngx-cookie-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Menu } from 'src/app/models/menu.model';
 
 @Component({
@@ -17,6 +17,8 @@ export class TemplateComponent implements OnInit {
 
   public resMenu:any = {};
   public menus:Menu[] = [];
+
+  @ViewChild('drawer') matDrawer:any;
 
   constructor(
     private cookie:CookieService,
@@ -40,10 +42,14 @@ export class TemplateComponent implements OnInit {
         // console.log(this.resMenu);
       })
     );
+
+  }
+
+  cerrarMenu(event:any){
+    this.matDrawer.close();
   }
 
   salir(){
-    console.log("click");
 
     localStorage.clear();
     this.cookie.delete('user');

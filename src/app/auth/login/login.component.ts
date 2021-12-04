@@ -50,12 +50,11 @@ export class LoginComponent implements OnInit {
           this._snackService.open('Bienvenido !!');
           // console.log(res);
           this.cookieService.set('user', JSON.stringify(res.data));
-          this.router.navigateByUrl('app/home');
+          this.router.navigateByUrl('/app/home');
         }else{
           this._snackService.open(res.message, 'text-red');
           this.lookButton = false;
         }
-
       });
     }
   }
