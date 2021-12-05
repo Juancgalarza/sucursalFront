@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-a, p, small{
+a, p, small, span, button{
   font-family: 'Comfortaa', cursive;
 }
 
@@ -39,4 +39,22 @@ input{
   outline: none;
   background-color: #dfe;
   border: 0;
+}
+
+input[type=email],
+input[type=password],
+input[type=text], textarea{
+    border: 0px solid #fff;
+    outline: none;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0,0,0,.42) ;
+    border-radius: 0px;
+    font-family: 'Comfortaa', cursive;
 }

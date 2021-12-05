@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NegocioService } from './../../../servicios/negocio/negocio.service';
 import { ValidacionService } from './../../../servicios/validacion/validacion.service';
 import { Negocio } from './../../../models/negocio.model';
@@ -5,7 +6,7 @@ import { Horario } from './../../../models/horario.model';
 import { interval, Observable } from 'rxjs';
 import { GeneralService } from './../../../servicios/general/general.service';
 import { Provincia } from './../../../models/pronvincia.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TipoNegocio } from 'src/app/models/tipoNegocio.model';
 import { Ciudad } from 'src/app/models/ciudad.model';
 import { Seccion } from 'src/app/models/seccion.model';
@@ -13,6 +14,7 @@ import { TipoEmpleado } from 'src/app/models/tipoEmpleado.model';
 import { Empleado } from 'src/app/models/empleado.modet';
 import { EmpleadoService } from 'src/app/servicios/empleado/empleado.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SnackService } from 'src/app/shared/snack/snack.service';
 
 @Component({
   selector: 'app-nueva-sucursal',
@@ -31,6 +33,7 @@ export class NuevaSucursalComponent implements OnInit {
 
   public form!: FormGroup;
   public submitted = false;
+  public lookButton = false;
 
   public negocio!:Negocio;
 
@@ -39,7 +42,8 @@ export class NuevaSucursalComponent implements OnInit {
     private _empleadoService:EmpleadoService,
     private builder:FormBuilder,
     private _validacionService:ValidacionService,
-    private _negocioService:NegocioService
+    private _negocioService:NegocioService,
+    private _snackService:SnackService,
   ) {
     this.iniciarForm();
     this.initNegocio();
@@ -152,12 +156,20 @@ export class NuevaSucursalComponent implements OnInit {
         this.negocio.empleado_id = parseInt(myForm.empleado_id);
         this.negocio.ubicacion = myForm.ubicacion;
 
-        this.form.reset();
+        this.submitted = false;
+        this.lookButton = true;
 
         this._negocioService.create({negocio: this.negocio})
         .subscribe((res:any) => {
-          this.submitted = false;
 
+          if(res.estado){
+            this.form.reset();
+            this._snackService.open(res.mensaje, 'text-success');;
+          }else{
+            this._snackService.open(res.mensaje, 'text-danger');;
+          }
+
+          this.lookButton = false;
         });
       }
       // this.submitted = false;

@@ -7,8 +7,10 @@
       <div class="container-fluid">
         <!-- <a class="navbar-brand" href="#">Navbar scroll</a> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          (click)="more =! more"
           aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-          <mat-icon>menu</mat-icon>
+          <mat-icon *ngIf="!more">expand_more</mat-icon>
+          <mat-icon *ngIf="more">expand_less</mat-icon>
         </button>
 
         <div class="collapse navbar-collapse text-center" id="navbarScroll">

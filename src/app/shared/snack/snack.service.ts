@@ -1,3 +1,4 @@
+import { SnackComponent } from './snack/snack.component';
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
@@ -10,7 +11,8 @@ export class SnackService {
   private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private _snack:MatSnackBar
   ) { }
 
   open(message:string, color:string = 'text-info', time:number = 2){
@@ -22,4 +24,9 @@ export class SnackService {
     });
   }
 
+  openSnack(data:any = null){
+    this._snack.openFromComponent(SnackComponent,{
+      duration: 2000
+    });
+  }
 }

@@ -12,6 +12,7 @@ export class BaseSucursalComponent implements OnInit {
 
   public menusChildren:any = {};
   public user:Usuario;
+  public more = false;
 
   private menu_hijos_sucursales = 2;
 
