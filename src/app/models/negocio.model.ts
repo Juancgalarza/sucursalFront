@@ -1,3 +1,6 @@
+import { TipoEmpleo } from "./tipoEmpleo";
+import { TipoNegocio } from "./tipoNegocio.model";
+
 export interface Negocio {
   id:number;
   empleado_id:number;

@@ -1,0 +1,34 @@
+.t-hover{
+  transition: all 0.5s ease-in-out;
+}
+
+.t-hover:hover{
+  /* border:1px solid purple; */
+  background-color:  #a51bb2;
+  color: #fff;
+}
+
+.btn-rose{
+  border: 0px solid red;
+  outline: none;
+  background-color:transparent;
+  color: #cb0c9f;
+  border-radius: 4px;
+  transition: all 0.5s ease-in-out;
+  font-weight: bold;
+}
+
+.btn-rose:hover{
+  background-color: #cb0c9f;
+  color: #fff;
+}
+
+.card-detail{
+  width: 300px;
+  z-index: 10;
+  transition: all 0.7s ease-in-out;
+}
+
+.translate-x{
+  transform: translateX(-320px)
+}

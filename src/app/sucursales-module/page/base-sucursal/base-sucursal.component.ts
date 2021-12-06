@@ -33,7 +33,7 @@ export class BaseSucursalComponent implements OnInit {
     this._menuService.getMenus(this.user.rol_id, this.menu_hijos_sucursales)
     .subscribe((res:any) => {
       this.menusChildren = res;
-      console.log(this.menusChildren);
+      // console.log(this.menusChildren);
     });
   }
 }

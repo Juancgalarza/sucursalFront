@@ -16,4 +16,9 @@ export class NegocioService {
     let url = this._bs.getURlApi() + 'negocio';
     return this.http.post(url, data);
   }
+
+  get(){
+    let url = this._bs.getURlApi() + 'negocio';
+    return this.http.get(url);
+  }
 }

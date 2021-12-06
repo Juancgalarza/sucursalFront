@@ -68,7 +68,7 @@ export class NuevaSucursalComponent implements OnInit {
         horario_id: ['0'],
         tipo_empleo_id: ['0'],
         empleado_id: ['0'],
-        ubicacion: ['', [Validators.required, Validators.minLength(10)]]
+        ubicacion: ['', [Validators.required, Validators.minLength(15)]]
       }
     );
   }
@@ -164,9 +164,9 @@ export class NuevaSucursalComponent implements OnInit {
 
           if(res.estado){
             this.form.reset();
-            this._snackService.open(res.mensaje, 'text-success');;
+            this._snackService.open(res.mensaje, 'text-success');
           }else{
-            this._snackService.open(res.mensaje, 'text-danger');;
+            this._snackService.open(res.mensaje, 'text-rose');
           }
 
           this.lookButton = false;

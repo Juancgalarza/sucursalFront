@@ -41,6 +41,10 @@ input{
   border: 0;
 }
 
+.text-rose{
+  color: #ff0080;
+}
+
 input[type=email],
 input[type=password],
 input[type=text], textarea{

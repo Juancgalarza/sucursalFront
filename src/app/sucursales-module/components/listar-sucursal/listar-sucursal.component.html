@@ -1,86 +1,208 @@
-<div class="container-fluid p-2">
-  <div class="row">
+<div class="container-fluid p-2 aside-rigth">
+  <div class="row d-flex flex-nowrap">
     <div class="col-12">
       <div class="card">
         <div class="card-header pb-0">
-            <div class="row">
-              <div class="col-lg-6 col-7">
-                <h6>Negocios</h6>
-                <p class="text-sm mb-0">
-                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">30 negocios</span> disponibles
-                </p>
-              </div>
-
+          <div class="row">
+            <div class="col-lg-6 col-7">
+              <h6>Negocios</h6>
+              <p class="text-sm mb-0">
+                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                <span class="font-weight-bold ms-1">{{dataNegocio.cantidad}} negocios</span>
+                en lista
+              </p>
             </div>
+          </div>
         </div>
 
         <div class="card-body px-0 pb-2">
           <div class="table-responsive">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Negocios</th>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                      Gerente</th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Dirección</th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Tipo</th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let n of [1,1,1,1]">
-                    <td>
-                        <div class="d-flex px-2 py-1">
-                            <div>
-                              <img src="../assets/img/small-logos/logo-jira.svg"
-                              class="avatar avatar-sm me-3" alt="jira">
-                            </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="d-flex align-items-center">
-                        <div class="avatar-group mt-2">
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Ryan Tompson">
-                                <img src="../assets/img/team-1.jpg" alt="team1">
-                            </a>
-                          </div>
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="
+                  text-uppercase text-secondary text-xxs
+                  font-weight-bolder
+                  opacity-7
+                  ">
+                    Tipo
+                  </th>
+                  <th class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                    ">
+                    Negocios
+                  </th>
 
-                          <span style="margin-left: 5px;">Olga González</span>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">
-                          Santa Elena, Salinas </span>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold">
-                        Matriz </span>
-                    </td>
+                  <th class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    ">
+                    Tipo Empleado
+                  </th>
 
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">
-                        Online
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                  <th class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    ">
+                    Empleado
+                  </th>
+                  <th class="
+                      text-center text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                    ">
+                    Dirección
+                  </th>
+                  <th class="
+                      text-center text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                    ">
+                    Estado
+                  </th>
+
+                  <th class="
+                      text-center text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                    ">
+                    Más
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let n of dataNegocio.data" class="t-hover">
+                  <td class="align-middle text-center text-sm">
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira" />
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <span class="mb-0 text-sm">{{n.tipo_negocio.tipo}}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="text-xs font-weight-bold">{{n.nombre}} </span>
+                  </td>
+
+                  <td class="align-middle text-sm">
+                    <span class="text-xs font-weight-bold">{{n.tipo_empleo.tipo}} </span>
+                  </td>
+
+                  <td class="align-middle text-sm">
+                    <div class="d-flex align-items-center justify-content-start">
+                      <div class="avatar-group" >
+                        <a class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"
+                          data-bs-placement="bottom" title="{{n.empleado.persona.nombres}} {{n.empleado.persona.apellidos}}">
+                          <img src="../assets/img/team-1.jpg" alt="team1" />
+                        </a>
+                      </div>
+
+                      <span style="margin-left: 5px;" class="text-xs font-weight-bold">
+                        {{n.empleado.persona.nombres}} {{n.empleado.persona.apellidos}}</span>
+                    </div>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span class="text-xs font-weight-bold">
+                      {{n.provincia.provincia}}, {{n.ciudad.ciudad}}
+                    </span>
+                  </td>
+
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-success" *ngIf="n.estado == 'A'">
+                      Activo
+                    </span>
+
+                    <span class="badge badge-sm bg-gradient-secondary" *ngIf="n.estado == 'I'">
+                      Inactivo
+                    </span>
+                  </td>
+
+                  <td class="align-align-middle text-center">
+                    <a [matMenuTriggerFor]="menu" class="text-secondary font-weight-bold text-xs" style="cursor: pointer;">
+                      <mat-icon>more_horiz</mat-icon>
+                    </a>
+
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                        <mat-icon *ngIf="n.estado == 'I'">visibility</mat-icon>
+                        <mat-icon *ngIf="n.estado == 'A'">visibility_off</mat-icon>
+
+                        <span *ngIf="n.estado == 'I'">Activar</span>
+                        <span *ngIf="n.estado == 'A'">Desactivar</span>
+                      </button>
+                      <button mat-menu-item (click)="openDetails(n)">
+                        <mat-icon>apps</mat-icon>
+                        <span>Detalles</span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon>restore_from_trash</mat-icon>
+                        <span>Eliminar</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
     </div>
+
+    <div class="card card-detail aside-left" id="card-detail">
+      <div class="card-header pb-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="fw-bold" style="color: #cb0c9f;">Detalles</small>
+          <button class="btn-rose" style="margin-top: -5px;" (click)="closeDetail()">X</button>
+        </div>
+      </div>
+
+      <hr style="margin:5px">
+
+      <div class="card-body pb-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="border-width: 0 0 0px;">
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 5px; color: #cb0c9f;">label</mat-icon>
+              <span>{{seccion}}</span>
+            </div>
+          </li>
+
+          <li class="list-group-item" style="border-width: 0 0 0px;">
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 5px; color: #cb0c9f;">access_time</mat-icon>
+              <span>{{detailHorario.inicio}} - {{detailHorario.fin}}</span>
+            </div>
+          </li>
+          <li class="list-group-item" style="border-width: 0 0 0px;">
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 5px; color: #cb0c9f;">near_me</mat-icon>
+              <span>{{ubicacion}}</span>
+            </div>
+          </li>
+
+          <li class="list-group-item" style="border-width: 0 0 0px;">
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 5px; color: #cb0c9f;">info</mat-icon>
+              <span>{{creado.fecha}} -> {{creado.hora}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+
   </div>
 </div>
+
