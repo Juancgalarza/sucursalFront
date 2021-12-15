@@ -1,7 +1,8 @@
 import { Horario } from './../../../models/horario.model';
 import { Negocio } from './../../../models/negocio.model';
 import { NegocioService } from './../../../servicios/negocio/negocio.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SnackService } from 'src/app/shared/snack/snack.service';
 
 @Component({
   selector: 'app-listar-sucursal',
@@ -26,7 +27,8 @@ export class ListarSucursalComponent implements OnInit {
   };
 
   constructor(
-    private _negocioService:NegocioService
+    private _negocioService:NegocioService,
+    private _snackService:SnackService,
   ) {
   }
 
@@ -38,8 +40,6 @@ export class ListarSucursalComponent implements OnInit {
     this._negocioService.get()
     .subscribe((res:any) => {
       this.dataNegocio = res;
-
-      console.log(this.dataNegocio);
     });
   }
 
@@ -62,5 +62,49 @@ export class ListarSucursalComponent implements OnInit {
   closeDetail(){
     let card = document.getElementById('card-detail');
     card?.classList.remove('translate-x');
+  }
+
+  changeStatus(n:Negocio, status:string){
+
+    n.estado = status;
+    let id:string = 'tr-negocio-' + n.id;
+    let tr_negocio = document.getElementById(id);
+
+    if(n.estado == 'I'){
+      //Efectos para inactivo
+      tr_negocio?.classList.add('animate__heartBeat');
+      tr_negocio?.classList.add('bg-off');
+      tr_negocio?.classList.remove('animate__pulse');
+    }else
+    if(n.estado == 'A'){
+      tr_negocio?.classList.add('animate__pulse');
+      tr_negocio?.classList.remove('bg-off');
+      tr_negocio?.classList.remove('animate__heartBeat');
+    }else
+    if(n.estado == 'E'){
+      tr_negocio?.classList.add('animate__backOutRight');
+      tr_negocio?.classList.remove('animate__heartBeat');
+      tr_negocio?.classList.remove('animate__pulse');
+      tr_negocio?.classList.remove('bg-off');
+      tr_negocio?.classList.add('bg-remove');
+      tr_negocio?.classList.add('animate__backOutRight');
+
+      let copia:Array<any> = this.dataNegocio.data;
+      let newData:Array<any> = [];
+
+      setTimeout(() => {
+        copia.forEach((element:Negocio) => {
+          if(element.id != n.id){
+            newData.push(element);
+          }
+        });
+        this.dataNegocio.data = newData;
+      }, 800);
+    }
+
+    this._negocioService.changeStatus({negocio: n})
+    .subscribe((res:any) => {
+      this._snackService.open(res.mensaje, res.estado);
+    });
   }
 }

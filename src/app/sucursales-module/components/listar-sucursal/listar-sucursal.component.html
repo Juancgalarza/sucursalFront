@@ -78,7 +78,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let n of dataNegocio.data" class="t-hover">
+                <tr *ngFor="let n of dataNegocio.data" class="t-hover animate__animated" id="tr-negocio-{{n.id}}" [ngClass]="n.estado == 'I' ? 'bg-off' : ''">
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -89,8 +89,8 @@
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <span class="text-xs font-weight-bold">{{n.nombre}} </span>
+                  <td [routerLink]="['/app/sucursales/informacion',n.id]">
+                    <span class="text-xs font-weight-bold link-span">{{n.nombre}} </span>
                   </td>
 
                   <td class="align-middle text-sm">
@@ -132,12 +132,14 @@
                     </a>
 
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                        <mat-icon *ngIf="n.estado == 'I'">visibility</mat-icon>
-                        <mat-icon *ngIf="n.estado == 'A'">visibility_off</mat-icon>
+                      <button mat-menu-item (click)="changeStatus(n, 'I')" *ngIf="n.estado == 'A'">
+                        <mat-icon>visibility_off</mat-icon>
+                        <span>Desactivar</span>
+                      </button>
 
-                        <span *ngIf="n.estado == 'I'">Activar</span>
-                        <span *ngIf="n.estado == 'A'">Desactivar</span>
+                      <button mat-menu-item (click)="changeStatus(n, 'A')" *ngIf="n.estado == 'I'">
+                        <mat-icon>visibility</mat-icon>
+                        <span>Activar</span>
                       </button>
                       <button mat-menu-item (click)="openDetails(n)">
                         <mat-icon>apps</mat-icon>
@@ -147,7 +149,7 @@
                         <mat-icon>edit</mat-icon>
                         <span>Editar</span>
                       </button>
-                      <button mat-menu-item>
+                      <button mat-menu-item (click)="changeStatus(n, 'E')">
                         <mat-icon>restore_from_trash</mat-icon>
                         <span>Eliminar</span>
                       </button>
@@ -186,6 +188,7 @@
               <span>{{detailHorario.inicio}} - {{detailHorario.fin}}</span>
             </div>
           </li>
+
           <li class="list-group-item" style="border-width: 0 0 0px;">
             <div class="d-flex align-items-center">
               <mat-icon style="margin-right: 5px; color: #cb0c9f;">near_me</mat-icon>

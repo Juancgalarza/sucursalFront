@@ -1,3 +1,4 @@
+import { PageSucursalComponent } from './components/pageSucursal/page-sucursal/page-sucursal.component';
 import { ListarSucursalComponent } from './components/listar-sucursal/listar-sucursal.component';
 import { NuevaSucursalComponent } from './components/nueva-sucursal/nueva-sucursal.component';
 import { BaseSucursalComponent } from './page/base-sucursal/base-sucursal.component';
@@ -13,6 +14,9 @@ const routes: Routes = [
       },
       {
         path: 'listar', component: ListarSucursalComponent
+      },
+      {
+        path: 'informacion/:id', component: PageSucursalComponent
       }
     ]
   }

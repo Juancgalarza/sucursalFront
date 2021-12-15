@@ -15,12 +15,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import { PageSucursalComponent } from './components/pageSucursal/page-sucursal/page-sucursal.component';
 
 @NgModule({
   declarations: [
     BaseSucursalComponent,
     NuevaSucursalComponent,
-    ListarSucursalComponent
+    ListarSucursalComponent,
+    PageSucursalComponent
   ],
   imports: [
     CommonModule,

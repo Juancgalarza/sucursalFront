@@ -32,3 +32,17 @@
 .translate-x{
   transform: translateX(-320px)
 }
+
+.bg-off{
+  background-color: #cecece;
+}
+
+.bg-remove{
+  background-color: salmon;
+  transition: all 0.4s ease-in-out;
+}
+
+.link-span{
+  border-bottom: 1px solid #67748E;
+  cursor: pointer;
+}

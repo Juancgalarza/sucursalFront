@@ -81,7 +81,7 @@ export class NuevaSucursalComponent implements OnInit {
       empleado_id: 0,
       provincia_id: 0,
       ciudad_id: 0,
-      foto: '',
+      foto: 'curved0.jpg',
       estado: 'A',
       created_at: '',
       updated_at: '',
