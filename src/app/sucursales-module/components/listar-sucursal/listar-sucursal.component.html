@@ -5,12 +5,21 @@
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
-              <h6>Negocios</h6>
-              <p class="text-sm mb-0">
-                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                <span class="font-weight-bold ms-1">{{dataNegocio.cantidad}} negocios</span>
-                en lista
-              </p>
+              <div class="">
+                <h6>Negocios</h6>
+                <p class="text-sm mb-0">
+                  <i class="fa fa-check text-info" aria-hidden="true"></i>
+                  <span class="font-weight-bold ms-1">{{dataNegocio.cantidad}} negocios</span>
+                  en lista
+                </p>
+              </div>
+
+              <div class="mt-2">
+                <button mat-icon-button color="accent" (click)="abrirModalCategoria()">
+                  <mat-icon>label_important</mat-icon>
+                  <span>Categorias</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

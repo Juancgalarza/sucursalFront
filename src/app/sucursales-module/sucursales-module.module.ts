@@ -16,13 +16,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { PageSucursalComponent } from './components/pageSucursal/page-sucursal/page-sucursal.component';
+import { CategoriaModalComponent } from './modals/categoria-modal/categoria-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     BaseSucursalComponent,
     NuevaSucursalComponent,
     ListarSucursalComponent,
-    PageSucursalComponent
+    PageSucursalComponent,
+    CategoriaModalComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +40,12 @@ import { PageSucursalComponent } from './components/pageSucursal/page-sucursal/p
     MatInputModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatChipsModule,
+    FormsModule
   ],
-  exports: []
+  exports: [],
+  entryComponents: [CategoriaModalComponent]
 })
 export class SucursalesModuleModule { }

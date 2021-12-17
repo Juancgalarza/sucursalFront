@@ -1,0 +1,39 @@
+
+<h2 mat-dialog-title color="accent">Categorías !!</h2>
+<div may-dialog-content>
+ <div class="card">
+   <div class="card-body">
+     <div>
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip *ngFor="let cat of dataCategoria.categoria" (removed)="remove(cat)">
+         {{cat.detalle}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+     </div>
+
+     <hr>
+
+     <div class="w-100 d-flex justify-content-between align-items-center">
+      <mat-form-field class="" appearance="legacy">
+        <mat-label>Nueva categoría</mat-label>
+        <input matInput placeholder="" [(ngModel)]="categoria" (keypress)="validateLetters($event)">
+      </mat-form-field>
+
+      <button mat-mini-fab color="accent" aria-label="Icono for add"
+      [disabled]="categoria.length < 3" (click)="add()">
+        <mat-icon>add</mat-icon>
+      </button>
+     </div>
+   </div>
+ </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="cerrar()">
+    Close
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>

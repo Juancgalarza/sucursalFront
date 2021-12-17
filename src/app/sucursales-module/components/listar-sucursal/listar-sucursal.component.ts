@@ -1,8 +1,10 @@
+import { CategoriaModalComponent } from './../../modals/categoria-modal/categoria-modal.component';
 import { Horario } from './../../../models/horario.model';
 import { Negocio } from './../../../models/negocio.model';
 import { NegocioService } from './../../../servicios/negocio/negocio.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SnackService } from 'src/app/shared/snack/snack.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-listar-sucursal',
@@ -29,6 +31,7 @@ export class ListarSucursalComponent implements OnInit {
   constructor(
     private _negocioService:NegocioService,
     private _snackService:SnackService,
+    private matDialog:MatDialog
   ) {
   }
 
@@ -106,5 +109,12 @@ export class ListarSucursalComponent implements OnInit {
     .subscribe((res:any) => {
       this._snackService.open(res.mensaje, res.estado);
     });
+  }
+
+  abrirModalCategoria(){
+
+    const matdialogRef = this.matDialog.open(CategoriaModalComponent,{
+      data: true
+    })
   }
 }
