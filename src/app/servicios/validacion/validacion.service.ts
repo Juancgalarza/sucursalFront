@@ -31,7 +31,7 @@ export class ValidacionService {
   validateAphaNumeric(event:any):Boolean{
     const charcode:any = (event.which) ? event.which : event.keyCode;
 
-    if(charcode == 31 || (charcode >= 48 && charcode <= 57) || (charcode >= 65 && charcode <= 122)){
+    if(charcode == 31 || (charcode >= 48 && charcode <= 57) || (charcode >= 65 && charcode <= 122) || ( charcode == 32)){
       return true;
     }
 
@@ -129,5 +129,10 @@ export class ValidacionService {
       // this._snackService.open('Esta cedula tiene menos de 10 Digitos');
       return false;
    }
+  }
+
+  validarEmail(email:string){
+    let expreReg:RegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    return expreReg.test(email) ? true : false;
   }
 }

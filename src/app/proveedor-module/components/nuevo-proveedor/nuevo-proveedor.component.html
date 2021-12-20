@@ -1,0 +1,116 @@
+<div class="container-fluid p-2 card">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="text-center border-card">
+        <img src="./../../../../assets/more/proveedor.jpg" alt="" width="250px" class="">
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-8">
+      <form [formGroup]="form" (ngSubmit)="procesarForm()">
+        <div class="p-3 w-100 d-flex justify-content-end">
+          <div class="row w-100">
+            <div class="col-12 form-group">
+              <input type="text" class="form-control" placeholder="Ingrese ruc del proveedor" formControlName="ruc"
+                (keypress)="validarNumber($event)"
+                [ngClass]="(submitted && f.ruc?.errors) || (f.ruc.touched || f.ruc.dirty) ? 'is-invalid': ''"
+                [ngClass]="f.ruc.valid ? 'is-valid': ''" maxlength="13">
+
+              <div *ngIf="submitted || (f.ruc.touched || f.ruc.dirty)">
+                <small *ngIf="f.ruc.errors?.required" class="text-danger">
+                  Ruc es requerido
+                </small>
+
+                <small *ngIf="f.ruc.errors?.minlength" class="text-danger">
+                  Mínimo de 13 carácteres
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <input type="text" class="form-control" placeholder="Ingrese razon social del proveedor"
+                formControlName="razon_social" (keypress)="validaLetter($event)"
+                [ngClass]="(submitted && f.razon_social?.errors) || (f.razon_social.touched || f.razon_social.dirty) ? 'is-invalid': ''"
+                [ngClass]="f.razon_social.valid ? 'is-valid': ''" maxlength="13">
+
+              <div *ngIf="submitted || (f.razon_social.touched || f.razon_social.dirty)">
+                <small *ngIf="f.razon_social.errors?.required" class="text-danger">
+                  Razon social es requerido
+                </small>
+
+                <small *ngIf="f.razon_social.errors?.minlength" class="text-danger">
+                  Mínimo de 3 carácteres
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <input type="email" class="form-control" placeholder="Ingrese email del proveedor" formControlName="email"
+                [ngClass]="(submitted && f.email?.errors) || (f.email.touched || f.email.dirty  || !emailValid) ? 'is-invalid': ''"
+                [ngClass]="f.email.valid && emailValid ? 'is-valid': ''" (keyup)="validateEmail($event)">
+
+              <div *ngIf="submitted || (f.email.touched || f.email.dirty)">
+                <small *ngIf="f.email.errors?.required" class="text-danger">
+                  email es requerido
+                </small>
+
+                <small *ngIf="f.email.errors?.email" class="text-danger">
+                  Formato de email es incorrecto !!
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 form-group">
+                  <input type="text" class="form-control" placeholder="Ingrese telefono del proveedor" formControlName="telefono"
+                    (keypress)="validarNumber($event)"
+                    [ngClass]="(submitted && f.telefono?.errors) || (f.telefono.touched || f.telefono.dirty) ? 'is-invalid': ''"
+                    [ngClass]="f.telefono.valid ? 'is-valid': ''" maxlength="13">
+
+                  <div *ngIf="submitted || (f.telefono.touched || f.telefono.dirty)">
+                    <small *ngIf="f.telefono.errors?.required" class="text-danger">
+                      Telefono es requerido
+                    </small>
+
+                    <small *ngIf="f.telefono.errors?.minlength" class="text-danger">
+                      Mínimo de 10 carácteres
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-6 form-group">
+                  <input type="text" class="form-control" placeholder="Ingrese telefono 2 del proveedor" formControlName="telefono2"
+                    (keypress)="validarNumber($event)">
+
+                  <div *ngIf="submitted || (f.telefono.touched || f.telefono.dirty)">
+                    <small *ngIf="f.telefono2.errors?.required" class="text-danger">
+                      Telefono es requerido
+                    </small>
+
+                    <small *ngIf="f.telefono2.errors?.minlength" class="text-danger">
+                      Mínimo de 10 carácteres
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <textarea formControlName="direccion" (keypress)="validarAlphaNumeric($event)">
+              </textarea>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <button class="btn bg-gradient-dark" type="submit" [disabled]="form.invalid || lookButton || !emailValid">
+                <i *ngIf="lookButton" class="fa fa-spinner fa-spin" style="margin-right: 7px;"></i>
+                <i *ngIf="!lookButton" class="fa fa-floppy-o" style="margin-right: 7px;"></i>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

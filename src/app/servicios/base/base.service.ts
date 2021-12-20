@@ -7,8 +7,9 @@ export class BaseService {
 
   private url:string = '';
 
-  constructor() { 
+  constructor() {
     this.url = 'http://localhost:8000/api/';
+    // this.url = 'http://192.168.100.213:8000/api/';
   }
 
   getURlApi(){

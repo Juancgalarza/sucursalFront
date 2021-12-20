@@ -48,7 +48,11 @@ export class ListarSucursalComponent implements OnInit {
 
   openDetails(negocio:any){
     let card = document.getElementById('card-detail');
-    card?.classList.add('translate-x');
+    card?.classList.remove('d-none');
+
+    setTimeout(() => {
+      card?.classList.add('translate-x');
+    }, 200);
 
     this.detailHorario = negocio.horario;
     this.ubicacion = negocio.ubicacion;
@@ -59,12 +63,15 @@ export class ListarSucursalComponent implements OnInit {
     this.creado.fecha = array[0];
     this.creado.hora = array[1].split('.')[0];
 
-    console.log(array);
   }
 
   closeDetail(){
     let card = document.getElementById('card-detail');
     card?.classList.remove('translate-x');
+
+    setTimeout(() => {
+      card?.classList.add('d-none');
+    }, 800);
   }
 
   changeStatus(n:Negocio, status:string){

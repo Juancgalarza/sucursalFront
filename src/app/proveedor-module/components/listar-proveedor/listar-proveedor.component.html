@@ -1,0 +1,112 @@
+<div class="container-fluid p-2 card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card-header pb-0">
+        <div class="row">
+          <div class="col-lg-6 col-7">
+            <div class="">
+              <h6>Proveedores</h6>
+              <p class="text-sm mb-0">
+                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                <span class="font-weight-bold ms-1">{{proveedorData.cantidad}} proveedores</span>
+                en lista
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-3">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <tr class="text-center">
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                N°
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Ruc
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Razon Social
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Correo
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Telefono 1
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Telefono 2
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Direccion
+              </th>
+
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Estado
+              </th>
+
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Más
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="t-hover animate__animated" *ngFor="let n of proveedorData.data; let i = index">
+              <th class="align-middle text-center text-sm">{{i+1}}</th>
+              <th class="align-middle text-center text-sm">{{n.ruc}} </th>
+              <th class="align-middle text-center text-sm">{{n.razon_social}} </th>
+              <th class="align-middle text-center text-sm">{{n.email}} </th>
+              <th class="align-middle text-center text-sm">{{n.telefono}} </th>
+              <th class="align-middle text-center text-sm">{{n.telefono2}} </th>
+              <th class="align-middle text-center text-sm">{{n.direccion}} </th>
+              <th class="align-middle text-center text-sm">
+                <span class="badge badge-sm bg-gradient-success" *ngIf="n.estado == 'A'">
+                  Activo
+                </span>
+                <span class="badge badge-sm bg-gradient-secondary" *ngIf="n.estado == 'I'">
+                  Inactivo
+                </span>
+              </th>
+              <th class="align-middle text-center text-sm">
+                <a [matMenuTriggerFor]="menu" class="text-secondary font-weight-bold text-xs" style="cursor: pointer;">
+                  <mat-icon>more_horiz</mat-icon>
+                </a>
+
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="changeStatus(n, 'I')">
+                    <mat-icon>visibility_off</mat-icon>
+                    <span>Desactivar</span>
+                  </button>
+
+                  <!-- <button mat-menu-item (click)="changeStatus(n, 'A')" *ngIf="n.estado == 'I'">
+                    <mat-icon>visibility</mat-icon>
+                    <span>Activar</span>
+                  </button> -->
+
+                  <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button mat-menu-item (click)="changeStatus(n, 'E')">
+                    <mat-icon>restore_from_trash</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                </mat-menu>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

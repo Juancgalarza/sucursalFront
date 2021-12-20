@@ -1,0 +1,8 @@
+.card-hover{
+  transition: all 0.5s ease-in-out;
+}
+
+.card-hover:hover{
+  background-color: rgba(102, 51, 153, 0.357);
+  color: #fff;
+}

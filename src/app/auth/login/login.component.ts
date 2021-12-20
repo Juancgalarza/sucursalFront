@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     }else{
       this.lookButton = true;
       let json = { usuario: this.userLogin }
+      
       this._userServicie.login(json)
 
       .subscribe((res:any) => {

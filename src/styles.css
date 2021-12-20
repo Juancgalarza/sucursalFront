@@ -62,3 +62,16 @@ input[type=text], textarea{
     border-radius: 0px;
     font-family: 'Comfortaa', cursive;
 }
+
+.d-none{
+  display: none;
+}
+
+.t-hover{
+  transition: all 0.5s ease-in-out;
+}
+
+.t-hover:hover{
+  background-color:  #a51bb2;
+  color: #fff;
+}

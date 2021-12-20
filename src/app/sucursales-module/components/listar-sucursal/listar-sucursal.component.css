@@ -1,12 +1,3 @@
-.t-hover{
-  transition: all 0.5s ease-in-out;
-}
-
-.t-hover:hover{
-  /* border:1px solid purple; */
-  background-color:  #a51bb2;
-  color: #fff;
-}
 
 .btn-rose{
   border: 0px solid red;
