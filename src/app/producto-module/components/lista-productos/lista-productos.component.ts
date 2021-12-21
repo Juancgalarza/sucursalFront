@@ -71,7 +71,8 @@ export class ListaProductosComponent implements OnInit {
   add(){
 
     const nuevoProductoModal = this.dialog.open(NuevoProductoComponent,{
-      data: {}
+      data: {},
+      width: '650px',
     });
 
     nuevoProductoModal.afterClosed().subscribe((res:any) => {

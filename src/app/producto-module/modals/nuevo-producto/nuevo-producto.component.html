@@ -1,17 +1,117 @@
-<h2 mat-dialog-title class="text-danger">Edit Receiver</h2>
+<h2 mat-dialog-title class="text-primary">Agregar nuevo producto</h2>
 <div may-dialog-content>
   <div class="container-fluid">
-    hola mundo
-  </div>
-</div>
+    <div class="row">
+      <div class="col-12 col-md-6 mb-2">
+        <div class="h-100 w-100 d-flex align-items-center">
+          <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
+            <ngx-dropzone-label>
+              <div>
+                <h2>Imagen del producto</h2>
+              </div>
+            </ngx-dropzone-label>
 
-<div mat-dialog-actions>
-  <button class="btn btn-primary btn-sm d-flex align-items-center" style="margin-right: 10px;">
-    <mat-icon style="margin-right: 5px;">check</mat-icon>
-    <span>Guardar</span>
-  </button>
-  <button class="btn btn-outline-danger btn-sm d-flex align-items-center" (click)="cerrar()">
-    <mat-icon style="margin-right: 5px;">close</mat-icon>
-    <span>Cerrar</span>
-  </button>
-</div>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+              [removable]="true" (removed)="onRemove(f)">
+            </ngx-dropzone-image-preview>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 mb-2">
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-12 form-group">
+
+              <input matInput placeholder="Nombre del producto" formControlName="nombre"
+                (keypress)="validarAlfanumerico($event)" class="form-control" type="text"
+                [ngClass]="(submitted && f.nombre?.errors) || (f.nombre.touched || f.nombre.dirty) ? 'is-invalid': ''"
+                [ngClass]="f.nombre.valid ? 'is-valid': ''" maxlength="60">
+
+              <div *ngIf="submitted || (f.nombre.touched || f.nombre.dirty)">
+                <small *ngIf="f.nombre.errors?.required" class="text-danger">
+                  Nombre producto es requerido
+                </small>
+
+                <small *ngIf="f.nombre.errors?.minlength" class="text-danger">
+                  Mínimo de 3 carácteres
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <input matInput placeholder="Código del producto" formControlName="codigo"
+                (keypress)="validarAlfanumerico($event)" class="form-control" type="text"
+                [ngClass]="(submitted && f.codigo?.errors) || (f.codigo.touched || f.codigo.dirty) ? 'is-invalid': ''"
+                [ngClass]="f.codigo.valid ? 'is-valid': ''">
+
+              <div *ngIf="submitted || (f.codigo.touched || f.codigo.dirty)">
+                <small *ngIf="f.codigo.errors?.required" class="text-danger">
+                  Código del producto es requerido
+                </small>
+
+                <small *ngIf="f.codigo.errors?.minlength" class="text-danger">
+                  Mínimo de 4 carácteres
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Proveedor</mat-label>
+                <mat-select formControlName="proveedor_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let d of proveedores" [value]="d.id">
+                    {{d.razon_social}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="submitted || (f.proveedor_id.touched || f.proveedor_id.dirty)">
+                <small *ngIf="f.proveedor_id.errors?.required" class="text-danger">
+                  Proveedor es requerido
+                </small>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="categoria_id">
+                  <mat-option value="0">Seleccione una opción</mat-option>
+                  <mat-option *ngFor="let d of categoria" [value]="d.id">
+                    {{d.detalle}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12">
+              <input matInput placeholder="Precio de venta" formControlName="precio_venta"
+              (keypress)="validarNumeroDecimal($event)" class="form-control" type="number"
+              [ngClass]="(submitted && f.precio_venta?.errors) || (f.precio_venta.touched || f.precio_venta.dirty) ? 'is-invalid': ''"
+              [ngClass]="f.precio_venta.valid ? 'is-valid': ''" min="0.01">
+
+              <div *ngIf="submitted || (f.precio_venta.touched || f.precio_venta.dirty)">
+                <small *ngIf="f.precio_venta.errors?.required" class="text-danger">
+                  Precio venta del producto es requerido
+                </small>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="btn btn-primary btn-sm d-flex align-items-center" style="margin-right: 10px;"
+    (click)="guardar()">
+      <mat-icon style="margin-right: 5px;">check</mat-icon>
+      <span>Guardar</span>
+    </button>
+    <button class="btn btn-outline-danger btn-sm d-flex align-items-center" (click)="cerrar()">
+      <mat-icon style="margin-right: 5px;">close</mat-icon>
+      <span>Cerrar</span>
+    </button>
+  </div>

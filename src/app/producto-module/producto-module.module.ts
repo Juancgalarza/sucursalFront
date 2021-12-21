@@ -19,6 +19,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NuevoProductoComponent } from './modals/nuevo-producto/nuevo-producto.component';
 
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 @NgModule({
   declarations: [
     BaseProductoComponent,
@@ -41,7 +43,8 @@ import { NuevoProductoComponent } from './modals/nuevo-producto/nuevo-producto.c
     FormsModule,
     AdminModule,
     PipesModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxDropzoneModule
   ],
   entryComponents:[NuevoProductoComponent]
 })

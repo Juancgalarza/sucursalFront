@@ -21,4 +21,9 @@ export class ProveedorService {
     let url:string = this._bs.getURlApi() + 'proveedor';
     return this.http.get(url);
   }
+
+  getByEstado(estado:string){
+    let url:string = this._bs.getURlApi() + 'proveedor/estado/' + estado;
+    return this.http.get(url);
+  }
 }

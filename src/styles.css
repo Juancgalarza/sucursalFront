@@ -47,6 +47,7 @@ input{
 
 input[type=email],
 input[type=password],
+input[type=number],
 input[type=text], textarea{
     border: 0px solid #fff;
     outline: none;
