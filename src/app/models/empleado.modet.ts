@@ -1,3 +1,4 @@
+import { TipoEmpleado } from 'src/app/models/tipoEmpleado.model';
 import { Persona } from "./persona.model";
 
 export interface Empleado{
@@ -8,5 +9,5 @@ export interface Empleado{
   estado:string;
   created_at:string;
   updated_at:string;
-  persona:Persona
+  persona:Persona;
 }

@@ -77,7 +77,8 @@ export class ListaProductosComponent implements OnInit {
 
     nuevoProductoModal.afterClosed().subscribe((res:any) => {
       if(res){
-        console.log("add to array");
+        console.log(res);
+        this.get();
       }
     })
   }

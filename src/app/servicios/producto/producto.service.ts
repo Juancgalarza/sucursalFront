@@ -21,4 +21,9 @@ export class ProductoService {
     let url:string = this._bs.getURlApi() + 'producto/actualizar-estado';
     return this.http.put(url, data);
   }
+
+  create(data:any){
+    let url:string = this._bs.getURlApi() + 'producto';
+    return this.http.post(url, data);
+  }
 }

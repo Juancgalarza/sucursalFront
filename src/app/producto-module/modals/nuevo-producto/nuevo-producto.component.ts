@@ -1,3 +1,5 @@
+import { ToolService } from './../../../servicios/tool/tool.service';
+import { ProductoService } from './../../../servicios/producto/producto.service';
 import { CategoriaService } from './../../../servicios/categoria/categoria.service';
 import { ProveedorService } from 'src/app/servicios/proveedor/proveedor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -25,6 +27,7 @@ export class NuevoProductoComponent implements OnInit {
 
   public submitted = false;
   public activeImage:Boolean = false;
+  public look = false;
 
   constructor(
     public dialogRef: MatDialogRef<NuevoProductoComponent>,
@@ -33,19 +36,36 @@ export class NuevoProductoComponent implements OnInit {
     private builder:FormBuilder,
     private _validarService:ValidacionService,
     private _proveedorService:ProveedorService,
-    private _categoriaService:CategoriaService
+    private _categoriaService:CategoriaService,
+    private _prodcutoService:ProductoService,
+    private _toolService:ToolService
   ) {
     this.dialogRef.disableClose = true;
   }
 
   ngOnInit(): void {
+    this.initProducto();
     this.iniciarForm();
     this.getProveedores();
     this.getCategorias();
   }
 
   initProducto(){
-    this.producto.foto = 'producto-default.png';
+    this.producto = {
+      foto: '',
+      categoria_id: 0,
+      codigo: '',
+      created_at: '',
+      estado: 'A',
+      fecha: '',
+      id: 0,
+      margen: 0,
+      nombre: '',
+      precio_compra: 0,
+      precio_venta: 0,
+      proveedor_id: 0,
+      updated_at: ''
+    }
   }
 
   iniciarForm(){
@@ -95,6 +115,7 @@ export class NuevoProductoComponent implements OnInit {
   onRemove(event:any) {
 		this.files.splice(this.files.indexOf(event), 1);
     this.activeImage = false;
+    this.producto.foto = '';
 	}
 
   get f(){
@@ -112,5 +133,36 @@ export class NuevoProductoComponent implements OnInit {
     if(this.form.invalid){
       return;
     }
+
+    this.asingarForm(form); this.look = true;
+
+    if(this.producto.foto == 'producto-default.png'){
+      //Guardar  solo el producto con image por default
+      this._prodcutoService.create({producto: this.producto})
+      .subscribe((res:any) => {
+        if(res.estado){
+          this._snack.open(res.mensaje, 'text-primary');
+          this.initProducto();
+          this.form.reset();
+          this.dialogRef.close(res.producto);
+        }else{
+          this._snack.open(res.mensaje, 'text-danger');
+        }
+
+        this.look = false;
+      });
+    }else{
+
+    }
+  }
+
+  asingarForm(form:any){
+    this.producto.nombre = form.nombre;
+    this.producto.codigo = form.codigo;
+    this.producto.proveedor_id = form.proveedor_id;
+    this.producto.categoria_id = form.categoria_id;
+    this.producto.precio_venta = form.precio_venta;
+
+    this.producto.foto = (this.activeImage) ? this.files[0].name : 'producto-default.png';
   }
 }

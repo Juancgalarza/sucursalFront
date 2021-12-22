@@ -1,3 +1,4 @@
+import { ToolService } from './../../../../servicios/tool/tool.service';
 import { NegocioService } from './../../../../servicios/negocio/negocio.service';
 import { Negocio } from './../../../../models/negocio.model';
 import { Component, OnInit } from '@angular/core';
@@ -11,19 +12,39 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class PageSucursalComponent implements OnInit {
 
   public negocio_id:any;
-  public negocio:any  = {};
+  public negocio:any  = {
+    horario: {
+      inicio:'', fin:''
+    },
+    tipo_negocio:{
+      tipo: ''
+    },
+    provincia: { provincia: ''},
+    ciudad: { ciudad: ''},
+    seccion: {tipo: ''}
+  };
   public empleado = {
     persona: {
       nombres: '',
       apellidos: ''
+    },
+    tipo_empleo:{
+      tipo: ''
+    },
+    usuario:{
+      img: ''
     }
   };
 
+  public foto:string = '';
+  public control = false;
+
   constructor(
     private rutaActiva: ActivatedRoute,
-    private _negocioService:NegocioService
+    private _negocioService:NegocioService,
+    private _toolService:ToolService
     ) {
-      this.negocio = {};
+
     }
 
   ngOnInit(): void {
@@ -36,7 +57,11 @@ export class PageSucursalComponent implements OnInit {
     .subscribe((res:any) => {
       this.negocio = res;
       this.empleado = res.empleado;
-      console.log(this.empleado);
+      // console.log(this.negocio);
+
+      this.foto = this._toolService.getFile('usuarios', this.empleado.usuario.img);
+      this.control = true;
     });
   }
+
 }
