@@ -111,7 +111,7 @@
                       <div class="avatar-group" >
                         <a class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"
                           data-bs-placement="bottom" title="{{n.empleado.persona.nombres}} {{n.empleado.persona.apellidos}}">
-                          <img src="../assets/img/team-1.jpg" alt="team1" />
+                          <img [src]="view(n.empleado.usuario.img)" alt="team1" />
                         </a>
                       </div>
 

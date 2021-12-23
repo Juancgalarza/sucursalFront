@@ -138,22 +138,32 @@ export class NuevoProductoComponent implements OnInit {
 
     if(this.producto.foto == 'producto-default.png'){
       //Guardar  solo el producto con image por default
-      this._prodcutoService.create({producto: this.producto})
+      this.create();
+    }else{
+      this._toolService.sendFile(this.files, 'img_user', 'upload')
       .subscribe((res:any) => {
         if(res.estado){
-          this._snack.open(res.mensaje, 'text-primary');
-          this.initProducto();
-          this.form.reset();
-          this.dialogRef.close(res.producto);
-        }else{
-          this._snack.open(res.mensaje, 'text-danger');
-        }
-
-        this.look = false;
+          this.producto.foto = res.imagen;
+          this.create();
+        }else
+          this.look = false;
       });
-    }else{
-
     }
+  }
+
+  create(){
+    this._prodcutoService.create({producto: this.producto})
+    .subscribe((res:any) => {
+      if(res.estado){
+        this._snack.open(res.mensaje, 'text-primary');
+        this.initProducto();
+        this.form.reset();
+        this.dialogRef.close(res.producto);
+      }else{
+        this._snack.open(res.mensaje, 'text-danger');
+      }
+      this.look = false;
+    });
   }
 
   asingarForm(form:any){

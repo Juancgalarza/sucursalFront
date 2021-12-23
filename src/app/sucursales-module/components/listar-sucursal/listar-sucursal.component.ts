@@ -1,3 +1,4 @@
+import { ToolService } from './../../../servicios/tool/tool.service';
 import { CategoriaModalComponent } from './../../modals/categoria-modal/categoria-modal.component';
 import { Horario } from './../../../models/horario.model';
 import { Negocio } from './../../../models/negocio.model';
@@ -31,7 +32,8 @@ export class ListarSucursalComponent implements OnInit {
   constructor(
     private _negocioService:NegocioService,
     private _snackService:SnackService,
-    private matDialog:MatDialog
+    private matDialog:MatDialog,
+    private _toolService:ToolService
   ) {
   }
 
@@ -44,6 +46,10 @@ export class ListarSucursalComponent implements OnInit {
     .subscribe((res:any) => {
       this.dataNegocio = res;
     });
+  }
+
+  view(img:string){
+    return this._toolService.getFile('usuarios', img);
   }
 
   openDetails(negocio:any){
