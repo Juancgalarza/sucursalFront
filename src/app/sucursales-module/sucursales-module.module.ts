@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -45,7 +46,8 @@ import { SucursalProductoModalComponent } from './modals/sucursal-producto-modal
     MatButtonModule,
     MatDialogModule,
     MatChipsModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   exports: [],
   entryComponents: [

@@ -1,16 +1,16 @@
+import { SearchPipe } from './search/search.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginarPipe } from './paginacion/paginar.pipe';
 
-
-
 @NgModule({
   declarations: [
-    PaginarPipe
+    PaginarPipe,
+    SearchPipe
   ],
   imports: [
     CommonModule
   ],
-  exports: [PaginarPipe]
+  exports: [PaginarPipe, SearchPipe]
 })
 export class PipesModule { }

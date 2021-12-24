@@ -1,3 +1,5 @@
+import { SucursalProductoModalComponent } from './../../../modals/sucursal-producto-modal/sucursal-producto-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ToolService } from './../../../../servicios/tool/tool.service';
 import { NegocioService } from './../../../../servicios/negocio/negocio.service';
 import { Negocio } from './../../../../models/negocio.model';
@@ -21,7 +23,8 @@ export class PageSucursalComponent implements OnInit {
     },
     provincia: { provincia: ''},
     ciudad: { ciudad: ''},
-    seccion: {tipo: ''}
+    seccion: {tipo: ''},
+    descripcion: ''
   };
   public empleado = {
     persona: {
@@ -36,13 +39,16 @@ export class PageSucursalComponent implements OnInit {
     }
   };
 
+  public nproductos:any[] = [];
+
   public foto:string = '';
   public control = false;
 
   constructor(
     private rutaActiva: ActivatedRoute,
     private _negocioService:NegocioService,
-    private _toolService:ToolService
+    private _toolService:ToolService,
+    private dialog:MatDialog
     ) {
 
     }
@@ -50,6 +56,7 @@ export class PageSucursalComponent implements OnInit {
   ngOnInit(): void {
     this.negocio_id =  this.rutaActiva.snapshot.params.id;
     this.getNegocio();
+    this.getProductos();
   }
 
   getNegocio(){
@@ -64,4 +71,28 @@ export class PageSucursalComponent implements OnInit {
     });
   }
 
+  getProductos(){
+    this._negocioService.getProductos(this.negocio_id)
+    .subscribe((res:any) => {
+      this.nproductos = res;
+      console.log(res);
+    });
+  }
+
+  view(filename:string){
+    return this._toolService.getFile('producto', filename);
+  }
+
+  openModal(){
+    const ref = this.dialog.open(SucursalProductoModalComponent,{
+      data: this.negocio,
+      width:'620px'
+    });
+
+    ref.afterClosed().subscribe((res:any) => {
+      if(res){
+        this.getProductos();
+      }
+    })
+  }
 }

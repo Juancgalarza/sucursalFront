@@ -24,7 +24,8 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    let dato: any = this.cookieService.get('user');
+    // let dato: any = this.cookieService.get('user');
+    let dato:any = localStorage.getItem('user');
 
     if (dato) {
       dato = JSON.parse(dato);

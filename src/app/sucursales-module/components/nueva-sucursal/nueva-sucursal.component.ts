@@ -88,7 +88,8 @@ export class NuevaSucursalComponent implements OnInit {
       seccion_id: 0,
       horario_id: 0,
       tipo_empleo_id:0,
-      ubicacion: ''
+      ubicacion: '',
+      descripcion: ''
     }
   }
 

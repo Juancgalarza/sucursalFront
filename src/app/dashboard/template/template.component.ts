@@ -33,7 +33,8 @@ export class TemplateComponent implements OnInit {
   }
 
   getMenus(){
-    this.usuario = JSON.parse(this.cookie.get('user'));
+    let data:any = localStorage.getItem('user');
+    this.usuario = JSON.parse(data);
 
     this._menuService.getMenus(this.usuario.rol_id).subscribe(
       ((res:any) => {
@@ -52,9 +53,6 @@ export class TemplateComponent implements OnInit {
   salir(){
 
     localStorage.clear();
-    this.cookie.delete('user');
-
     this.router.navigateByUrl('/login');
-
   }
 }

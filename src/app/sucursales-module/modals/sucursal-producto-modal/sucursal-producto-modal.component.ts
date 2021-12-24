@@ -1,9 +1,12 @@
+import { NegocioService } from './../../../servicios/negocio/negocio.service';
+import { ValidacionService } from './../../../servicios/validacion/validacion.service';
 import { ProductoService } from './../../../servicios/producto/producto.service';
 import { Observable } from 'rxjs';
 import { CategoriaService } from './../../../servicios/categoria/categoria.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categoria } from 'src/app/models/categoria.model';
+import { SnackService } from 'src/app/shared/snack/snack.service';
 
 export interface aux {
   cantidad: number,
@@ -27,7 +30,10 @@ export class SucursalProductoModalComponent implements OnInit {
     public dialogRef: MatDialogRef<SucursalProductoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,
     private _categoriaService:CategoriaService,
-    private _productoService:ProductoService
+    private _productoService:ProductoService,
+    private _validarService:ValidacionService,
+    private _snack:SnackService,
+    private _negocioService:NegocioService
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +82,39 @@ export class SucursalProductoModalComponent implements OnInit {
     }else{
       let nuevo = this.addProductos.filter(item => item.id != data.id);
       this.addProductos = nuevo;
+    }
+  }
+
+  validarAlphanumeric(event:any){
+    return this._validarService.validateAphaNumeric(event);
+  }
+
+  guardar(){
+    if(this.addProductos.length == 0){
+      this._snack.open('Debe seleccionar al menos un producto', 'text-warning');
+    }else{
+      let json = {
+        negocio: this.data,
+        productos: this.addProductos
+      };
+
+      this._negocioService.agregarProductos(json)
+      .subscribe((res:any) => {
+        console.log(res);
+        if(res.factor == 0){
+          this._snack.open(res.mensaje, 'text-danger');
+        }else
+        if(res.factor == 1){
+          this._snack.open(res.mensaje, 'text-warning');
+          this.addProductos = [];
+          this.dialogRef.close(true);
+        }else
+        if(res.factor == 2){
+          this._snack.open(res.mensaje, 'text-primary');
+          this.addProductos = [];
+          this.dialogRef.close(true);
+        }
+      });
     }
   }
 }

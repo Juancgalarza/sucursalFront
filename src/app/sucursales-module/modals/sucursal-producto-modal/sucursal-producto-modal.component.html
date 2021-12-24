@@ -13,7 +13,7 @@
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="legacy">
                   <mat-label>Buscar producto</mat-label>
-                  <input matInput [(ngModel)]="texto">
+                  <input matInput [(ngModel)]="texto" (keypress)="validarAlphanumeric($event)">
                   <button *ngIf="texto" matSuffix mat-icon-button aria-label="Clear" (click)="texto=''">
                     <mat-icon>close</mat-icon>
                   </button>
@@ -46,7 +46,7 @@
 
                 </li>
                 <li class="list-group-item list-group-item-action d-flex justify-content-between"
-                  *ngFor="let p of productos">
+                  *ngFor="let p of productos | search: texto">
                   <span>{{p.nombre}}</span>
                   <input type="checkbox" [(ngModel)]="p.checked" (change)="addProducto($event, p)">
                 </li>
@@ -80,7 +80,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button class="btn btn-primary">
+  <button class="btn btn-primary" (click)="guardar()">
     <span style="margin-right: 5px;">Guardar</span>
     <i class="fa fa-save" aria-hidden="true"></i>
   </button>

@@ -28,7 +28,8 @@ export class BaseSucursalComponent implements OnInit {
   }
 
   getMenusHijos(){
-    this.user = JSON.parse(this._cookiie.get('user'));
+    let data:any = localStorage.getItem('user');
+    this.user = JSON.parse(data);
 
     this._menuService.getMenus(this.user.rol_id, this.menu_hijos_sucursales)
     .subscribe((res:any) => {

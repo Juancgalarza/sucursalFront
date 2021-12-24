@@ -16,4 +16,5 @@ export interface Negocio {
   updated_at:string;
   tipo_empleo_id:number;
   ubicacion:string;
+  descripcion:string;
 }

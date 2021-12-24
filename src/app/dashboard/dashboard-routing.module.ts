@@ -12,6 +12,10 @@ const routes: Routes = [
     canActivate: [SesionGuard],
     children: [
       {
+        path: '',
+        redirectTo: 'home', pathMatch: 'full'
+      },
+      {
         path: 'home', component: HomeComponent
       },{
         path: 'users', component: UserAdminComponent

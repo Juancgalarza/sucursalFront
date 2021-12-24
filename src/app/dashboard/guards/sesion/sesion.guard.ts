@@ -19,7 +19,8 @@ export class SesionGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    let user:any = this.cookie.get('user');
+    // let user:any = this.cookie.get('user');
+    let user:any = localStorage.getItem('user');
 
     if(user){
       return true;

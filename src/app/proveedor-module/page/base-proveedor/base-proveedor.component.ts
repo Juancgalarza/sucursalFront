@@ -28,7 +28,8 @@ export class BaseProveedorComponent implements OnInit {
   }
 
   getMenusHijos(){
-    this.user = JSON.parse(this._cookie.get('user'));
+    let data:any = localStorage.getItem('user');
+    this.user = JSON.parse(data);
 
     this._menuService.getMenus(this.user.rol_id, this.menu_hijos)
     .subscribe((res:any) => {

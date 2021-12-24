@@ -32,4 +32,14 @@ export class NegocioService {
     let url:string = this._bs.getURlApi() + 'negocio/' + id_negocio;
     return this.http.get<Negocio>(url);
   }
+
+  agregarProductos(data:any){
+    let url:string = this._bs.getURlApi() + 'negocio/productos';
+    return this.http.post(url, data);
+  }
+
+  getProductos(id:any){
+    let url:string = this._bs.getURlApi() + 'negocio/productos/' + id;
+    return this.http.get(url);
+  }
 }

@@ -42,16 +42,15 @@ export class LoginComponent implements OnInit {
     }else{
       this.lookButton = true;
       let json = { usuario: this.userLogin }
-      
+
       this._userServicie.login(json)
 
       .subscribe((res:any) => {
 
         if(res.status){
           this._snackService.open('Bienvenido !!');
-          // console.log(res);
-          this.cookieService.set('user', JSON.stringify(res.data));
-          this.router.navigateByUrl('/app/home');
+          this.router.navigateByUrl('/app');
+          localStorage.setItem('user', JSON.stringify(res.data));
         }else{
           this._snackService.open(res.message, 'text-red');
           this.lookButton = false;
