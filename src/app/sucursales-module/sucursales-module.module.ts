@@ -20,6 +20,7 @@ import { CategoriaModalComponent } from './modals/categoria-modal/categoria-moda
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
+import { SucursalProductoModalComponent } from './modals/sucursal-producto-modal/sucursal-producto-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     NuevaSucursalComponent,
     ListarSucursalComponent,
     PageSucursalComponent,
-    CategoriaModalComponent
+    CategoriaModalComponent,
+    SucursalProductoModalComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,9 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [],
-  entryComponents: [CategoriaModalComponent]
+  entryComponents: [
+    CategoriaModalComponent,
+    SucursalProductoModalComponent
+  ]
 })
 export class SucursalesModuleModule { }

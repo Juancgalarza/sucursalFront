@@ -1,0 +1,92 @@
+<h2 mat-dialog-title color="accent">Agregar productos al negocio !!</h2>
+<div may-dialog-content>
+  <div style="overflow: auto;">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h3 class="m-0 fw-bold">{{data.nombre}}</h3>
+            <h4>Administrado por: {{data.empleado.persona.nombres}} {{data.empleado.persona.apellidos}}</h4>
+            <hr>
+
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="legacy">
+                  <mat-label>Buscar producto</mat-label>
+                  <input matInput [(ngModel)]="texto">
+                  <button *ngIf="texto" matSuffix mat-icon-button aria-label="Clear" (click)="texto=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="w-100">
+                  <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Categoría</mat-label>
+                    <mat-select (selectionChange)="cargarProductos($event)">
+                      <mat-option *ngFor="let c of categoriasData.categoria" [value]="c.id">{{c.detalle}}</mat-option>
+                      <mat-option value="-1">Todos</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div style="height: 260px; overflow: auto;">
+              <ul class="list-group">
+                <li type="button" class="list-group-item list-group-item-action active d-flex justify-content-between"
+                  aria-current="true">
+                  <span>Productos disponibles</span>
+                  <input type="checkbox" (change)="selectAll($event)" [checked]="isCheckedAll()">
+
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between"
+                  *ngFor="let p of productos">
+                  <span>{{p.nombre}}</span>
+                  <input type="checkbox" [(ngModel)]="p.checked" (change)="addProducto($event, p)">
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+
+            <div style="height: 260px; overflow: auto;">
+              <ul class="list-group">
+                <li type="button" class="list-group-item list-group-item-action active d-flex justify-content-between"
+                  aria-current="true">
+                  <span>Productos en lista</span>
+                </li>
+
+                <li class="list-group-item list-group-item-action w-100"
+                  *ngFor="let p of addProductos">
+                  <div *ngIf="p.checked" class=" d-flex justify-content-between">
+                    <span>{{p.nombre}}</span>
+                    <mat-icon>check</mat-icon>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button class="btn btn-primary">
+    <span style="margin-right: 5px;">Guardar</span>
+    <i class="fa fa-save" aria-hidden="true"></i>
+  </button>
+
+  <button class="btn btn-danger" (click)="cerrar()" style="margin-right: 10px;">
+    <span style="margin-right: 5px;">Cerrar</span>
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>

@@ -26,4 +26,9 @@ export class ProductoService {
     let url:string = this._bs.getURlApi() + 'producto';
     return this.http.post(url, data);
   }
+
+  byCategoria(categoria_id:any, estado:any){
+    let url:string = this._bs.getURlApi() + 'producto/categoria/' + categoria_id + '/' + estado;
+    return this.http.get(url);
+  }
 }

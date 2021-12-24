@@ -1,3 +1,4 @@
+import { SucursalProductoModalComponent } from './../../modals/sucursal-producto-modal/sucursal-producto-modal.component';
 import { ToolService } from './../../../servicios/tool/tool.service';
 import { CategoriaModalComponent } from './../../modals/categoria-modal/categoria-modal.component';
 import { Horario } from './../../../models/horario.model';
@@ -33,7 +34,8 @@ export class ListarSucursalComponent implements OnInit {
     private _negocioService:NegocioService,
     private _snackService:SnackService,
     private matDialog:MatDialog,
-    private _toolService:ToolService
+    private _toolService:ToolService,
+    private negocioProductoModal:MatDialog
   ) {
   }
 
@@ -125,9 +127,15 @@ export class ListarSucursalComponent implements OnInit {
   }
 
   abrirModalCategoria(){
-
     const matdialogRef = this.matDialog.open(CategoriaModalComponent,{
       data: true
     })
+  }
+
+  openModal(data:any){
+    const ref = this.negocioProductoModal.open(SucursalProductoModalComponent,{
+      data: data,
+      width: '650px'
+    });
   }
 }

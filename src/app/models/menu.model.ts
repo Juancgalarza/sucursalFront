@@ -7,4 +7,5 @@ export interface Menu{
   url:string;
   pos:number;
   estado:string;
+  descripcion:string;
 }

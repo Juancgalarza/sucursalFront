@@ -68,26 +68,22 @@
                     ">
                     Dirección
                   </th>
-                  <th class="
-                      text-center text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                    ">
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     Estado
                   </th>
 
-                  <th class="
-                      text-center text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                    ">
-                    Más
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    Acciones
                   </th>
 
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    Más
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let n of dataNegocio.data" class="t-hover animate__animated" id="tr-negocio-{{n.id}}" [ngClass]="n.estado == 'I' ? 'bg-off' : ''">
+                <tr *ngFor="let n of dataNegocio.data" class="t-hover animate__animated" id="tr-negocio-{{n.id}}"
+                  [ngClass]="n.estado == 'I' ? 'bg-off' : ''">
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -108,9 +104,9 @@
 
                   <td class="align-middle text-sm">
                     <div class="d-flex align-items-center justify-content-start">
-                      <div class="avatar-group" >
-                        <a class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"
-                          data-bs-placement="bottom" title="{{n.empleado.persona.nombres}} {{n.empleado.persona.apellidos}}">
+                      <div class="avatar-group">
+                        <a class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="{{n.empleado.persona.nombres}} {{n.empleado.persona.apellidos}}">
                           <img [src]="view(n.empleado.usuario.img)" alt="team1" />
                         </a>
                       </div>
@@ -135,12 +131,32 @@
                     </span>
                   </td>
 
+                  <td class="align-middle text-center text-sm">
+                    <div class="btn-group" style="margin-top: 5px;">
+                      <button class="btn btn-sm btn-primary"
+                      style="padding: 5px;" [disabled]="n.estado == 'I'">
+                        <mat-icon style="font-size: 18px;">edit</mat-icon>
+                        <!-- <span>Editar</span> -->
+                      </button>
+                      <button class="btn btn-sm btn-primary" (click)="changeStatus(n, 'E')"
+                      style="padding: 5px;">
+                        <mat-icon style="font-size: 18px;">delete</mat-icon>
+                        <!-- <span>Eliminar</span> -->
+                      </button>
+                    </div>
+                  </td>
+
                   <td class="align-align-middle text-center">
-                    <a [matMenuTriggerFor]="menu" class="text-secondary font-weight-bold text-xs" style="cursor: pointer;">
+                    <a [matMenuTriggerFor]="menu" class="text-secondary font-weight-bold text-xs"
+                      style="cursor: pointer;">
                       <mat-icon>more_horiz</mat-icon>
                     </a>
 
                     <mat-menu #menu="matMenu">
+                      <button mat-menu-item [routerLink]="['/app/sucursales/informacion',n.id]">
+                        <mat-icon>store_mall_directory</mat-icon>
+                        <span>Ver negocio</span>
+                      </button>
                       <button mat-menu-item (click)="changeStatus(n, 'I')" *ngIf="n.estado == 'A'">
                         <mat-icon>visibility_off</mat-icon>
                         <span>Desactivar</span>
@@ -150,18 +166,17 @@
                         <mat-icon>visibility</mat-icon>
                         <span>Activar</span>
                       </button>
+
+                      <button mat-menu-item (click)="openModal(n)" *ngIf="n.estado == 'A'">
+                        <mat-icon>queue</mat-icon>
+                        <span>Agregar Productos</span>
+                      </button>
+
                       <button mat-menu-item (click)="openDetails(n)">
                         <mat-icon>apps</mat-icon>
                         <span>Detalles</span>
                       </button>
-                      <button mat-menu-item>
-                        <mat-icon>edit</mat-icon>
-                        <span>Editar</span>
-                      </button>
-                      <button mat-menu-item (click)="changeStatus(n, 'E')">
-                        <mat-icon>restore_from_trash</mat-icon>
-                        <span>Eliminar</span>
-                      </button>
+
                     </mat-menu>
                   </td>
                 </tr>
@@ -216,4 +231,3 @@
     </div>
   </div>
 </div>
-
