@@ -260,11 +260,13 @@
                 </div>
               </div>
 
-              <div class="col-xl-3 col-md-6 mb-xl-0 mb-4" *ngFor="let p of nproductos; let i = index;">
+              <div class="col-xl-3 col-md-6 mb-xl-0 mb-4" *ngFor="let p of nproductos; let i = index;"
+              style="margin-top: 20px;">
                 <div class="card card-blog card-plain">
                   <div class="position-relative">
-                    <a class="d-block shadow-xl border-radius-xl">
-                      <img [src]="view(p.producto.foto)" alt="{{p.producto.nombre}} image" class="img-fluid shadow border-radius-xl">
+                    <a class="d-block shadow-xl border-radius-xl" style="height: 200px; overflow: hidden;">
+                      <img [src]="view(p.producto.foto)" alt="{{p.producto.nombre}} image" class="img-fluid shadow border-radius-xl"
+                      style="height: 100%; width: 100%;">
                     </a>
                   </div>
                   <div class="card-body px-1 pb-0">

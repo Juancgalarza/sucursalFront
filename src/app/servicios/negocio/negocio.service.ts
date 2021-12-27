@@ -42,4 +42,14 @@ export class NegocioService {
     let url:string = this._bs.getURlApi() + 'negocio/productos/' + id;
     return this.http.get(url);
   }
+
+  getNegociosByEstado(estado:string){
+    let url:string = this._bs.getURlApi() + 'negocio/estado/' + estado;
+    return this.http.get(url);
+  }
+
+  getProductosNegocio(id:any, categoria_id:any, estado:string = 'A'){
+    let url:string = this._bs.getURlApi() + 'producto_negocio/' + id + '/' + categoria_id + '/' + estado;
+    return this.http.get(url);
+  }
 }

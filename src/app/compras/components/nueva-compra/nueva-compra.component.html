@@ -1,0 +1,137 @@
+<div class="container-fluid p-2 card">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="text-center border-card">
+        <img src="./../../../../assets/more/compras-modulo.png" alt="" width="250px" class="">
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-8 mt-2">
+      <form [formGroup]="form" (ngSubmit)="procesarForm()">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <mat-form-field appearance="legacy" class="w-100">
+              <mat-label>Negocio</mat-label>
+              <mat-select formControlName="negocio_id" (selectionChange)="getNegocio($event)">
+                <mat-option value="0">Seleccione una opción</mat-option>
+                <mat-option *ngFor="let d of negocios.data" [value]="d.id">
+                  {{d.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-6 d-flex align-items-center">
+            <input type="text" class="form-control" placeholder="Miguel Perez" readonly formControlName="empleado">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 d-flex align-items-center flex-column">
+            <input type="text" class="form-control w-100" placeholder="Serie" formControlName="serie"
+            [ngClass]="(submitted && f.serie?.errors) || (f.serie.touched || f.serie.dirty) ? 'is-invalid': ''"
+            [ngClass]="f.serie.valid ? 'is-valid': ''" min="0.01">
+
+            <div *ngIf="submitted || (f.serie.touched || f.serie.dirty)">
+              <small *ngIf="f.serie.errors?.required" class="text-danger">
+                Serie es requerido
+              </small>
+
+              <small *ngIf="f.serie.errors?.minlength" class="text-danger">
+                Necesita un mínimo de  4 carácteres
+              </small>
+            </div>
+
+          </div>
+          <div class="col-12 col-md-6 d-flex align-items-center">
+            <input type="text" class="form-control" placeholder="Fecha" readonly formControlName="fecha">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <div class="w-100 d-flex justify-content-between align-items-center">
+                  <h3 class="fw-bold">Lista de productos</h3>
+                  <button class="btn-primary" style="border-radius: 5px;" (click)="openModalProductos()"
+                  *ngIf="negocioSeleccion.id != 0" type="button">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body px-0 pt-0 pb-2 box-items">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N°</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cantidad</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio U</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                        <th class="text-secondary opacity-7">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let p of lista; let i = index;">
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{i+1}}</span>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0">{{p.cantidad}}</p>
+                          <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{p.producto.nombre}}</h6>
+                              <p class="text-xs text-secondary mb-0">{{p.producto.categoria.detalle}}</p>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{p.producto.precio_compra}}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{p.total }}</span>
+                        </td>
+                        <td class="align-middle">
+                          <a href="javascript:;" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            Quitar
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-3 form-group">
+            <label for="">Subtotal</label>
+            <input type="text" class="form-control w-100" placeholder="Subtotal" readonly formControlName="subtotal">
+          </div>
+          <div class="col-12 col-md-3 form-group">
+            <label for="">Iva</label>
+            <input type="text" class="form-control w-100" placeholder="Iva" readonly formControlName="iva">
+          </div>
+          <div class="col-12 col-md-3 form-group">
+            <label for="">Total</label>
+            <input type="text" class="form-control w-100" placeholder="Total" readonly formControlName="total">
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-12 col-md-2 w-100">
+            <button class="btn-primary" mat-raised-button type="submit" color="accent"
+            [disabled]="lista.length == 0 || form.invalid || look">Guardar</button></div>
+        </div>
+      </form>
+
+      <br><br><br><br><br>
+    </div>
+  </div>
+</div>

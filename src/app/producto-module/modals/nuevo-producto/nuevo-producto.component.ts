@@ -29,6 +29,8 @@ export class NuevoProductoComponent implements OnInit {
   public activeImage:Boolean = false;
   public look = false;
 
+  private foto_default = "producto-default.jpg";
+
   constructor(
     public dialogRef: MatDialogRef<NuevoProductoComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,
@@ -136,7 +138,7 @@ export class NuevoProductoComponent implements OnInit {
 
     this.asingarForm(form); this.look = true;
 
-    if(this.producto.foto == 'producto-default.png'){
+    if(this.producto.foto == this.foto_default){
       //Guardar  solo el producto con image por default
       this.create();
     }else{

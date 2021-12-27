@@ -80,7 +80,7 @@ export class PageSucursalComponent implements OnInit {
   }
 
   view(filename:string){
-    return this._toolService.getFile('producto', filename);
+    return this._toolService.getFile('productos', filename);
   }
 
   openModal(){
