@@ -19,12 +19,14 @@ import { NuevaCompraComponent } from './components/nueva-compra/nueva-compra.com
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddProductosComprasComponent } from './modals/add-productos-compras/add-productos-compras.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ListarComponent } from './components/listar/listar.component';
 
 @NgModule({
   declarations: [
     BaseComponent,
     NuevaCompraComponent,
-    AddProductosComprasComponent
+    AddProductosComprasComponent,
+    ListarComponent
   ],
   imports: [
     CommonModule,

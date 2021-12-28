@@ -1,0 +1,13 @@
+.box-red{
+  width: 70px;
+  height: auto;
+  background-color: tomato;
+  backdrop-filter: 10px;
+}
+
+.box-green{
+  width: 70px;
+  height: auto;
+  background-color: limegreen;
+  backdrop-filter: 10px;
+}

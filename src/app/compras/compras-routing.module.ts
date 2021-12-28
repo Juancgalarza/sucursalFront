@@ -1,3 +1,4 @@
+import { ListarComponent } from './components/listar/listar.component';
 import { NuevaCompraComponent } from './components/nueva-compra/nueva-compra.component';
 import { BaseComponent } from './pages/base/base.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,8 @@ const routes: Routes = [
      },
      {
        path: 'nueva', component: NuevaCompraComponent
+     },{
+       path: 'listar', component: ListarComponent
      }
    ]
   }];

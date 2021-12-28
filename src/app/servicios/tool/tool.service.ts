@@ -29,4 +29,14 @@ export class ToolService {
 
    return this.http.post(urlCompleta, formdata);
   }
+
+  getYear(estado:string = 'A'){
+    let url:string = this._bs.getURlApi() + 'year/' + estado;
+    return this.http.get(url);
+  }
+
+  getMeses(){
+    let url:string = this._bs.getURlApi() + 'month';
+    return this.http.get<any[]>(url);
+  }
 }

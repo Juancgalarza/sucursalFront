@@ -21,4 +21,14 @@ export class CompraService {
     let url:string = this._bs.getURlApi() + 'detallecompra';
     return this.http.post(url, data);
   }
+
+  get(negocio_id:any, status_id:any, year:any, month:any){
+    let url:string = this._bs.getURlApi() + 'compra/' + negocio_id + '/' + status_id + '/' + year + '/' + month;
+    return this.http.get(url);
+  }
+
+  cantidadEstado(negocio_id:any, year:any, month:any){
+    let url:string = this._bs.getURlApi() + 'compra/cantidad/' + negocio_id + '/' + year + '/' + month;
+    return this.http.get(url);
+  }
 }

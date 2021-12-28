@@ -1,0 +1,114 @@
+<div class="container-fluid p-3 card">
+  <div class="row">
+    <div class="col-3">
+      <div class="row">
+        <div class="col-12 mb-1">
+          <small class="fw-bold">Filtrar por</small>
+        </div>
+        <div class="col-12 mb-2">
+          <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Negocio</mat-label>
+            <mat-select [(ngModel)]="negocio_id" (selectionChange)="changeCombo($event)">
+              <mat-option *ngFor="let n of negocios.data" [value]="n.id">
+                {{n.nombre}}
+              </mat-option>
+              <mat-option value="0">Todos</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 mb-1">
+          <small class="fw-bold">Estado</small>
+        </div>
+
+        <div class="col-12 mb-2">
+          <h4 style="margin-bottom: 0px; cursor: pointer;" (click)="changeStatus(1)">Pendientes <small>({{cantidad.pendientes}})</small></h4>
+          <h4 style="margin-bottom: 0px; cursor: pointer;" (click)="changeStatus(2)">Confirmados <small>({{cantidad.confirmados}})</small></h4>
+          <h4 style="margin-bottom: 0px; cursor: pointer;" (click)="changeStatus(0)">Todos <small>({{cantidad.todos}})</small></h4>
+        </div>
+      </div>
+
+      <div class="col-12 mb-1">
+        <small class="fw-bold">Fecha</small>
+      </div>
+
+      <div class="col-12 mb-2">
+        <mat-form-field appearance="legacy" class="w-100">
+          <mat-label>Año</mat-label>
+          <mat-select [(ngModel)]="year" (selectionChange)="changeCombo($event)">
+            <mat-option *ngFor="let n of years" [value]="n.year">
+              {{n.year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="w-100">
+          <mat-label>Mes</mat-label>
+          <mat-select [(ngModel)]="mes" (selectionChange)="changeMes($event)">
+            <mat-option *ngFor="let n of meses" [value]="n.value">
+              {{n.mes}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-9">
+      <div class="row">
+        <div class="col-12 mb-3 d-flex justify-content-between">
+          <div>
+            <small class="fw-bold h5 text-dark">{{year}} </small> >>
+            <span class="text-gray">{{textoMes}}</span>
+          </div>
+
+          <div>
+            Estado >
+            <span *ngIf="status_id == 0">Todos</span>
+            <span *ngIf="status_id == 1" class="text-danger">Pendientes</span>
+            <span *ngIf="status_id == 2" class="text-success">Confirmados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 mb-3" style="background-color: #f8f9fa; padding-left: 0px;"
+        *ngFor="let c of compras">
+          <div class="w-100 d-flex">
+           <div class="box-red" *ngIf="c.status_id == 1"></div>
+           <div class="box-green" *ngIf="c.status_id == 2"></div>
+
+           <div style="margin-left: 5px; padding: 5px;" class="d-flex flex-column w-100">
+             <div class="d-flex justify-content-between w-100">
+               <h4 style="margin-bottom: 8px;" class="text-left">Serie: {{c.serie}}</h4>
+               <small>{{c.fecha}}</small>
+             </div>
+             <div class="d-flex justify-content-between">
+               <div class="d-flex flex-column">
+                 <span class="fw-bold">Total: ${{c.total}}</span>
+                 <small>Iva: ${{c.iva}} | Subtotal: ${{c.subtotal}}</small>
+               </div>
+               <div>
+                 <small>{{c.elementos}} Elementos</small>
+               </div>
+             </div>
+             <div class="mt-1" style="cursor: pointer;">
+               <small class="btn-link" style="margin-right: 5px;">Ver compra</small>
+               <small class="btn-link" *ngIf="c.status_id == 1" (click)="confirmar(c)">Confirmar</small>
+             </div>
+           </div>
+          </div>
+         </div>
+
+         <!-- <div class="col-12">
+           <mat-paginator [length]="productosData.data.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page"
+            (page)="handlePage($event)">
+          </mat-paginator></div> -->
+      </div>
+
+      <br><br><br><br><br>
+    </div>
+  </div>
+</div>
